@@ -18,13 +18,13 @@ Cache aprroaches in get business partner from data base. This way improves perfo
  ![Screenshot](https://github.com/ronaldoleitte1975/zd-backendchallenge/blob/master/Cache%20Diagram.png)
 
 ### Bean Validations in Controllers
-BusinessPartnerController class has validations' annotation like @NotNull @Min, @Max, @Valid. Those are a better way validate in first application's layer avoiding processing invalid objetcs. BusinessPartner model class has annotations too like @NotBlank, @CNPJ, @Null and annotations is validates by @Valid annotation in BusinnesPartnerController methods.
+BusinessPartnerController class has validations' annotation like @NotNull @Min, @Max, @Valid. Those are a better way validate in first application's layer avoiding processing invalid objetcs. BusinessPartner model class has annotations too like @NotBlank, @CNPJ, @Null and annotations is validates by @Valid annotation in BusinnesPartnerController end-points.
 
 ### Docker Compose
-Docker compose that automatically starts all necessary dependencies (redis and mongodb) and starts the web application on port 5151. 
+Docker compose that automatically starts all necessary dependencies (redis and mongodb) and starts API on port 5151. 
 
 ### Postman Collections
-Follow link below the Postman Collection repository:
+Follow link below about Postman Collection repository:
 
 https://documenter.getpostman.com/view/4082433/SzzheeQX?version=latest
 
@@ -36,6 +36,6 @@ Follow steps below in order to run this API through docker environment:
 `docker-compose up --build`
 
 
-If you want run API in your IDE, change API port from `5151` to `8080` in `docker-compose.yml`, in `application.yml`  change mogo uri to: `mongodb://localhost:27017/db` and run `docker-compose-up` in order to start MongoDB e Redis containers.
+If you want run API in your IDE, change API port from `5151` to `8080` in `docker-compose.yml`. In `application.yml`  change mogo uri to: `mongodb://localhost:27017/db` and run `docker-compose-up` in order to start MongoDB e Redis containers.
 
  
