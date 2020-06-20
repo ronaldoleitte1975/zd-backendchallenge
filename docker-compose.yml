@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  api:
+    build: .
+    ports:
+      - "5151:5151"
+    depends_on:
+      - redis
+      - mongo
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
