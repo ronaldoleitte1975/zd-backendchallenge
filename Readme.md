@@ -1,4 +1,4 @@
-## Technologies
+## Stack
 - Java 8
 - Spring Boot 2.3.0
 - Maven
@@ -26,7 +26,7 @@ Docker compose that automatically starts all necessary dependencies (redis and m
 ### Postman Collections
 Follow link below about Postman Collection repository:
 
-https://documenter.getpostman.com/view/4082433/SzzheeQX?version=latest
+https://web.postman.co/collections/4082433-e96388ea-7b10-4f9c-8ce7-b22f385fe08e?version=latest&workspace=6d9e3974-c2c1-47b2-862b-b72071a0f5c9
 
 ### Run API
 Follow steps below in order to run this API through docker environment:
