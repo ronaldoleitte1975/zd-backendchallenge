@@ -42,6 +42,9 @@ jobs:
         path: .qodana/code-coverage
 
     - name: Qodana Scan
-      uses: JetBrains/qodana-action@v2023.3
+      uses: JetBrains/qodana-action@v2023.3-eap
       env:
-        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_MVN_JACOCO }}      
+        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+      with:
+        args: "-i,,--linter,jetbrains/qodana-jvm:2023.3-eap"
+        pr-mode: false
