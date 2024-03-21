@@ -28,12 +28,10 @@ jobs:
           cache: 'maven'
 
       - name: Validate Maven Wrapper
-        run: mvn --version
-        working-directory: /
+        run: mvn --version        
 
       - name: Run Tests
-        run: mvn clean test jacoco:report
-        working-directory: /
+        run: mvn clean test jacoco:report        
 
       - name: Archive coverage data
         uses: actions/upload-artifact@v2
