@@ -1,50 +1,53 @@
-name: JaCoCo Agent - Maven Test
+
+name: CI
 
 on:
-  workflow_dispatch:
-  pull_request:
   push:
     branches:
       - main
-      - 'releases/*'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        fetch-depth: 0
-
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-        cache: 'maven'
-
-    - name: Validate Maven Wrapper
-      run: mvn --version
-      working-directory: 
-
-    - name: Run Tests
-      run: mvn test
-      working-directory: 
-      
-    - name: Archive coverage data
-      uses: actions/upload-artifact@v2
-      with:
-        name: maven-coverage-data-jacoco
-        path: .qodana/code-coverage
-
-    - name: Qodana Scan
-      uses: JetBrains/qodana-action@v2023.3
-      env:
-        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
-      with:
-        args: "-i,,--linter,jetbrains/qodana-jvm:2023.3-eap"
-        pr-mode: false
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Build & Test
+        run: ./gradlew clean build test
+      - name: Upload build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: build/reports/jacoco/code-coverage
+  static-analysis:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - name: Download build folder
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: .qodana/code-coverage
+      - name: Static analysis
+        uses: JetBrains/qodana-action@v2023.3
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+        with:
+          upload-result: true
