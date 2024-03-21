@@ -46,6 +46,6 @@ jobs:
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:
-          args: "-i,JVM/jacoco/maven,--linter,jetbrains/qodana-jvm:2023.3"
+          args: "-i,qodana/code-coverage,--linter,jetbrains/qodana-jvm:2023.3"
           pr-mode: false
           upload-result: true
