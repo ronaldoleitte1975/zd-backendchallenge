@@ -134,7 +134,7 @@
                             <outputDirectory>.qodana/code-coverage</outputDirectory>
                             <formats>XML</formats>
                             <includes>
-                                <include>org/example/**</include>
+                                <include>br/com/zecode/backendchallenge/**</include>
                             </includes>
                         </configuration>
                     </execution>
